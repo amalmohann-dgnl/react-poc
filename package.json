@@ -21,7 +21,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "rm-dist-webos": "rm -rf ./platforms/WebOs/dist || rm -r ./platforms/WebOs/dist || rmdir ./platforms/WebOs/dist",
+    "rm-dist-tizen": "rm -rf ./platforms/Tizen/www || rm -r ./platforms/Tizen/www || rmdir ./platforms/Tizen/www",
+    "cp-dist-webos": "cp -r ./build/ ./platforms/WebOS/dist/ || copy ./build/ ./platforms/WebOS/dist/",
+    "cp-dist-tizen": "cp -r ./build/ ./platforms/Tizen/www/ || copy ./build/ ./platforms/Tizen/www/",
+    "build-dist": "npm run rm-dist-webos && npm run rm-dist-tizen && npm run build  && npm run cp-dist-webos && npm run cp-dist-tizen"
   },
   "eslintConfig": {
     "extends": [
