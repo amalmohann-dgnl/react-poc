@@ -1,0 +1,10 @@
+{
+  "id": "com.diagnal.purereact",
+  "version": "0.0.1",
+  "vendor": "Diagnal",
+  "type": "web",
+  "main": "./dist/index.html",
+  "title": "Pure React",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png"
+}
