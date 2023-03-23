@@ -1,0 +1,70 @@
+@startuml Virtualized Carousal
+actor "User" as U
+participant "Controller" as C
+participant "DOM" as DOM
+== Initial Render ==
+C->C: Process data from prop (**rawData**) to **data**
+note right of C
+The data received from prop is not used
+as such by the component. A pre-processing is
+done on this data. The **data** is the pre-processed
+version of **rawData** from the props.
+end note
+C->C: Compute Initial **renderArray**
+C->DOM: Render Initial **renderArray**
+C->C: Calulate width and height properties.    .
+== On Scrolling ==
+U->C: Scrolling
+alt If infiniteScrolling = false
+  C->C:Update **renderArray**
+  C->DOM:Render updated **renderArray**
+else If **infiniteScrolling** = true
+  alt If Rail is at the end
+    C->C: Swap end of Render Array with the start
+    C->C: Updating **renderArray**
+    C->DOM: Render updated **renderArray**
+    C->DOM: Scroll to the start
+  else If Rail is at the start
+    C->C: Swap start of Render Array with the end
+    C->C: Updating **renderArray**
+    C->DOM: Render updated **renderArray**
+    C->DOM: Scroll to the end
+  end
+end
+== On Handle Click ==
+' C->DOM: Scroll to the end
+note right of C
+   Carousal will have a right and left handle on the left and right end.
+   The behaviour of the rail on clicking the handle is mentioned below.
+end note
+U->C: Right Handle clicked
+alt If infinteScrolling = true & at end
+  C->DOM: Scroll first card to center
+else
+  C->DOM: Scroll carousal to the right by a scroll width corresponding to \n **handleScrollCount** from prop.
+end
+U->C: Left Handle clicked
+alt If infinteScrolling = true & at start
+  C->DOM: Scroll last card to center
+else
+  C->DOM: Scroll carousal to the left by a scroll width corresponding to \n **handleScrollCount** from prop.
+end 
+
+== On Idle ==
+alt If autoScrolling = true
+  C->DOM: Scroll next card to center.
+  note right of C
+  Repeat the above step every **autoScrollDelay** seconds.
+  end note
+else
+  C->C: Do nothing.
+end
+
+== On Resizing ==
+C->C: Update Width and height properties.
+C->C: updating **renderArray**
+C->DOM: Render updated **renderArray**
+
+
+
+@enduml

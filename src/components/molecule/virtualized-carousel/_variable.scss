@@ -1,0 +1,15 @@
+$desktop-breakpoint : 1440px;
+$tablet-breakpoint : 1024px;
+$mobile-breakpoint : 600px;
+
+
+
+$max-page-margin: 0 54px; // above 1440px
+$page-margin: 0 5vw; // for all oter resolution
+
+$max-inter-card-margin-half: 8px; // above 1440px;
+$inter-card-margin-half: 0.55vw; // from all other reslution
+
+
+$rail-handler-width: 54px;
+$max-rail-handler-width: 5vw
